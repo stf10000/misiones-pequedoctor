@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Misiones de Autonomia - Pequedoctor</title>
+<title>Misiones de Autonomía - Pequedoctor</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0A0E1A">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -22,11 +22,17 @@ body>*{position:relative;z-index:1}
 .streak-label{font-size:10px;color:var(--t3);margin-right:4px;font-weight:600}
 .streak-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1);transition:all .4s}
 .streak-dot.lit{background:var(--gold);box-shadow:0 0 6px rgba(240,192,64,0.8);transform:scale(1.3)}
+
+/* Info button */
+.btn-info{width:28px;height:28px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);transition:all .2s;flex-shrink:0;margin-left:6px}
+.btn-info:active{transform:scale(0.9)}
+.btn-info svg{width:14px;height:14px}
+
 #pantalla-edad{width:100%;max-width:440px;padding-top:20px;animation:fadeIn .6s;flex:1;display:flex;flex-direction:column;justify-content:center}
 .app-icon{width:72px;height:72px;margin:0 auto 16px;border-radius:18px;background:linear-gradient(135deg,#2A9D8F,#1D3557);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(42,157,143,0.3)}
 .app-icon svg{width:36px;height:36px;color:#fff}
 #pantalla-edad h1{font-size:30px;margin-bottom:6px;line-height:1.2;font-weight:800;letter-spacing:-0.5px}
-#pantalla-edad .subtitulo{font-size:15px;color:var(--t2);margin-bottom:32px;line-height:1.5}
+#pantalla-edad .subtitulo{font-size:15px;color:var(--t2);margin-bottom:24px;line-height:1.5}
 .btn-edad{display:flex;align-items:center;justify-content:space-between;width:100%;padding:20px 22px;margin-bottom:12px;border:1px solid var(--border);border-radius:16px;font-size:18px;font-weight:700;color:var(--t1);cursor:pointer;transition:all .2s;background:var(--card);backdrop-filter:blur(10px);text-align:left}
 .btn-edad:active{transform:scale(.97)}
 .btn-edad .edad-info{display:flex;flex-direction:column;gap:3px}
@@ -37,6 +43,7 @@ body>*{position:relative;z-index:1}
 .btn-exploradores .edad-icono{background:rgba(42,157,143,0.15);color:#2A9D8F}
 .btn-ayudantes .edad-icono{background:rgba(255,140,66,0.15);color:#FF8C42}
 .btn-autonomos .edad-icono{background:rgba(69,123,157,0.15);color:#457B9D}
+
 #pantalla-tablero{display:none;width:100%;max-width:460px;flex:1;flex-direction:column;align-items:center;justify-content:center;animation:fadeIn .5s}
 .turno-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;background:var(--card);border:1px solid var(--border)}
 .turno-badge svg{width:14px;height:14px}
@@ -65,6 +72,7 @@ body>*{position:relative;z-index:1}
 .t-carta{font-size:11px;font-weight:700;line-height:1.3;text-align:center;position:relative;z-index:1}
 .r-label{font-size:8px;text-transform:uppercase;letter-spacing:1px;margin-top:5px;opacity:.6;font-weight:800;position:relative;z-index:1}
 .instruccion-cartas{font-size:14px;color:var(--t2);margin-top:8px}
+
 #pantalla-bloqueo{display:none;width:100%;max-width:440px;padding-top:20px;animation:fadeIn .5s;flex:1;flex-direction:column;align-items:center;justify-content:center}
 .bloqueo-icono{width:80px;height:80px;border-radius:24px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .bloqueo-icono svg{width:40px;height:40px;color:var(--t2)}
@@ -74,6 +82,7 @@ body>*{position:relative;z-index:1}
 .countdown-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;font-weight:600}
 .countdown-timer{font-size:40px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums;letter-spacing:2px}
 .countdown-sub{font-size:13px;color:var(--t2);margin-top:10px}
+
 #pantalla-resultado{display:none;width:100%;max-width:440px;animation:fadeIn .5s;flex:1;flex-direction:column;align-items:center;justify-content:center;padding-bottom:20px}
 .resultado-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px 24px;width:100%;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
 .resultado-card.azul{border-color:rgba(69,123,157,0.3)}
@@ -100,6 +109,26 @@ body>*{position:relative;z-index:1}
 .link-consulta:hover{color:var(--orange)}
 .btn-volver{display:block;margin:12px auto 0;background:transparent;border:none;color:var(--t3);font-size:13px;cursor:pointer;padding:8px}
 .btn-volver:active{color:var(--t2)}
+
+/* Modal de instrucciones */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:100;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.active{display:flex;animation:fadeIn .3s}
+.modal-content{background:#131826;border:1px solid var(--border);border-radius:20px;max-width:440px;width:100%;max-height:85vh;overflow-y:auto;padding:24px 20px;position:relative}
+.modal-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--t2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.modal-content h2{font-size:22px;font-weight:800;margin-bottom:16px;text-align:center;background:linear-gradient(135deg,#2A9D8F,#FF8C42);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.instr-section{margin-bottom:20px;text-align:left}
+.instr-section h3{font-size:15px;font-weight:700;color:var(--t1);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.instr-section h3 svg{width:18px;height:18px;flex-shrink:0}
+.instr-section p{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:8px}
+.rareza-item{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:8px 12px;border-radius:10px;background:var(--card)}
+.rareza-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.rareza-dot.azul{background:#457B9D}
+.rareza-dot.morada{background:#6A4C93}
+.rareza-dot.dorada{background:#F0C040;box-shadow:0 0 8px rgba(240,192,64,0.5)}
+.rareza-dot.arcoiris{background:conic-gradient(#FF6B6B,#FFD93D,#6BCB77,#4D96FF,#9D4EDD,#FF6B6B)}
+.rareza-item span{font-size:13px;color:var(--t2)}
+.rareza-item strong{color:var(--t1);font-size:13px}
+
 #instalar-app{display:none;margin-top:12px;width:100%}
 #btn-instalar{display:block;width:100%;background:var(--card);color:var(--t1);border:1px solid var(--border);padding:10px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;margin-bottom:8px}
 .instrucciones-instalar{font-size:11px;color:var(--t3);line-height:1.5;text-align:left;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:8px}
@@ -113,32 +142,69 @@ body>*{position:relative;z-index:1}
 
 <div class="header">
   <div class="logo-text">PEQUEDOCTOR</div>
-  <div class="streak-container">
-    <span class="streak-label">Racha</span>
-    <span class="streak-dot" data-s="1"></span>
-    <span class="streak-dot" data-s="2"></span>
-    <span class="streak-dot" data-s="3"></span>
-    <span class="streak-dot" data-s="4"></span>
-    <span class="streak-dot" data-s="5"></span>
-    <span class="streak-dot" data-s="6"></span>
-    <span class="streak-dot" data-s="7"></span>
+  <div style="display:flex;align-items:center">
+    <div class="streak-container">
+      <span class="streak-label">Racha</span>
+      <span class="streak-dot" data-s="1"></span>
+      <span class="streak-dot" data-s="2"></span>
+      <span class="streak-dot" data-s="3"></span>
+      <span class="streak-dot" data-s="4"></span>
+      <span class="streak-dot" data-s="5"></span>
+      <span class="streak-dot" data-s="6"></span>
+      <span class="streak-dot" data-s="7"></span>
+    </div>
+    <div class="btn-info" id="btn-info">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE INSTRUCCIONES -->
+<div class="modal-overlay" id="modal-info">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <h2>Cómo funciona</h2>
+
+    <div class="instr-section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#2A9D8F"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Misiones diarias</h3>
+      <p>Cada día tienes <strong style="color:var(--t1)">2 oportunidades</strong> de jugar: una misión de día (6:00 AM a 4:59 PM) y una misión de noche (5:00 PM a 5:59 AM). Cumple la misión y márcala como completada para ganar estrellas.</p>
+    </div>
+
+    <div class="instr-section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#FF8C42"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>Niveles de rareza</h3>
+      <div class="rareza-item"><div class="rareza-dot azul"></div><div><strong>Misión Fácil</strong> <span>— Tareas sencillas de 1 minuto. (60% de probabilidad)</span></div></div>
+      <div class="rareza-item"><div class="rareza-dot morada"></div><div><strong>Misión Especial</strong> <span>— Tareas con un poco más de reto. (30%)</span></div></div>
+      <div class="rareza-item"><div class="rareza-dot dorada"></div><div><strong>Misión Épica</strong> <span>— Retos mayores que fomentan la conexión familiar. (10%)</span></div></div>
+      <div class="rareza-item"><div class="rareza-dot arcoiris"></div><div><strong>Recompensa Arcoíris</strong> <span>— ¡No es un deber, es un premio! Se desbloquea con rachas.</span></div></div>
+    </div>
+
+    <div class="instr-section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#F0C040"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Sistema de rachas</h3>
+      <p>Cada día que completes al menos una misión, encenderás una estrella. Si completas <strong style="color:var(--t1)">5 días consecutivos</strong>, desbloquearás automáticamente una <strong style="color:#FFD93D">Carta Arcoíris</strong> con una recompensa especial de conexión familiar.</p>
+      <p>La racha continúa hasta 7 estrellas. Si dejas de jugar un día completo, la racha se reinicia a cero. ¡La constancia es la clave!</p>
+    </div>
+
+    <div class="instr-section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#6A4C93"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>El juego de las 3 cartas</h3>
+      <p>Cuando entres, verás 3 cartas boca abajo. <strong style="color:var(--t1)">Toca solo una</strong> para revelar tu misión. No sabrás qué rareza te tocará hasta que la voltees. ¡Es parte de la emoción!</p>
+    </div>
   </div>
 </div>
 
 <div id="pantalla-edad">
   <div class="app-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-  <h1>Misiones de Autonomia</h1>
+  <h1>Misiones de Autonomía</h1>
   <p class="subtitulo">Selecciona el rango de edad para comenzar la aventura diaria</p>
   <button class="btn-edad btn-exploradores" data-edad="exploradores">
-    <div class="edad-info"><span class="edad-titulo">Exploradores</span><span class="edad-rango">2 a 3 anos</span></div>
+    <div class="edad-info"><span class="edad-titulo">Exploradores</span><span class="edad-rango">2 a 3 años</span></div>
     <div class="edad-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M9 8h.01M15 8h.01M9.5 10.5a3.5 3.5 0 0 0 5 0M5 20a7 7 0 0 1 14 0"/></svg></div>
   </button>
   <button class="btn-edad btn-ayudantes" data-edad="ayudantes">
-    <div class="edad-info"><span class="edad-titulo">Ayudantes</span><span class="edad-rango">4 a 6 anos</span></div>
+    <div class="edad-info"><span class="edad-titulo">Ayudantes</span><span class="edad-rango">4 a 6 años</span></div>
     <div class="edad-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M9 22v-6l-2-1v-4a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v4l-2 1v6"/></svg></div>
   </button>
   <button class="btn-edad btn-autonomos" data-edad="autonomos">
-    <div class="edad-info"><span class="edad-titulo">Autonomos</span><span class="edad-rango">7 anos o mas</span></div>
+    <div class="edad-info"><span class="edad-titulo">Autónomos</span><span class="edad-rango">7 años o más</span></div>
     <div class="edad-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M8 22v-7m8 7v-7M8 15l1-5h6l1 5"/></svg></div>
   </button>
 </div>
@@ -147,33 +213,33 @@ body>*{position:relative;z-index:1}
   <div class="turno-badge" id="turno-badge"></div>
   <h2 id="titulo-rango"></h2>
   <div class="cartas-container" id="cartas-container">
-    <div class="carta-wrapper" data-c="0"><div class="carta-3d" id="carta-0"><div class="cara cara-trasera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><div class="t-back">Mision</div></div><div class="cara cara-frontal" id="frontal-0"></div></div></div>
-    <div class="carta-wrapper" data-c="1"><div class="carta-3d" id="carta-1"><div class="cara cara-trasera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><div class="t-back">Mision</div></div><div class="cara cara-frontal" id="frontal-1"></div></div></div>
-    <div class="carta-wrapper" data-c="2"><div class="carta-3d" id="carta-2"><div class="cara cara-trasera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><div class="t-back">Mision</div></div><div class="cara cara-frontal" id="frontal-2"></div></div></div>
+    <div class="carta-wrapper" data-c="0"><div class="carta-3d" id="carta-0"><div class="cara cara-trasera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><div class="t-back">Misión</div></div><div class="cara cara-frontal" id="frontal-0"></div></div></div>
+    <div class="carta-wrapper" data-c="1"><div class="carta-3d" id="carta-1"><div class="cara cara-trasera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><div class="t-back">Misión</div></div><div class="cara cara-frontal" id="frontal-1"></div></div></div>
+    <div class="carta-wrapper" data-c="2"><div class="carta-3d" id="carta-2"><div class="cara cara-trasera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><div class="t-back">Misión</div></div><div class="cara cara-frontal" id="frontal-2"></div></div></div>
   </div>
-  <p class="instruccion-cartas" id="instruccion-cartas">Toca una carta para revelar tu mision</p>
+  <p class="instruccion-cartas" id="instruccion-cartas">Toca una carta para revelar tu misión</p>
 </div>
 
 <div id="pantalla-bloqueo">
   <div class="bloqueo-icono" id="icono-bloqueo"></div>
-  <h2 id="bloqueo-titulo">Mision completada!</h2>
-  <p class="mensaje" id="bloqueo-mensaje">Ya cumpliste tu mision de este turno.</p>
-  <div class="countdown-box"><div class="countdown-label" id="countdown-label">Proximo turno en</div><div class="countdown-timer" id="countdown-timer">00:00:00</div><div class="countdown-sub" id="countdown-sub"></div></div>
+  <h2 id="bloqueo-titulo">¡Misión completada!</h2>
+  <p class="mensaje" id="bloqueo-mensaje">Ya cumpliste tu misión de este turno.</p>
+  <div class="countdown-box"><div class="countdown-label" id="countdown-label">Próximo turno en</div><div class="countdown-timer" id="countdown-timer">00:00:00</div><div class="countdown-sub" id="countdown-sub"></div></div>
   <button class="btn-volver" id="btn-volver-bloqueo">Volver al inicio</button>
 </div>
 
 <div id="pantalla-resultado">
   <div class="resultado-card" id="resultado-card">
-    <span class="etiqueta-resultado" id="etiqueta-resultado">Tu mision es</span>
+    <span class="etiqueta-resultado" id="etiqueta-resultado">Tu misión es</span>
     <div class="icono-grande" id="icono-resultado"></div>
     <div class="texto-mision" id="texto-resultado"></div>
     <div class="texto-mision-sub" id="texto-resultado-sub"></div>
-    <button class="btn-cumplida" id="btn-cumplida" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="btn-cumplida-texto">Mision Cumplida</span></button>
+    <button class="btn-cumplida" id="btn-cumplida" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="btn-cumplida-texto">Misión Cumplida</span></button>
     <div id="banner-cta">
-      <h3 id="banner-titulo">Mision aceptada!</h3>
+      <h3 id="banner-titulo">¡Misión aceptada!</h3>
       <p id="banner-texto"></p>
-      <a href="#" target="_blank" class="btn-libro" id="btn-libro">Ver guia en Amazon</a>
-      <a href="https://pequedoctor.wordpress.com/contactos-agenda/" target="_blank" class="link-consulta">Estas en Merida? Agenda una consulta presencial</a>
+      <a href="#" target="_blank" class="btn-libro" id="btn-libro">Ver guía en Amazon</a>
+      <a href="https://pequedoctor.wordpress.com/contactos-agenda/" target="_blank" class="link-consulta">¿Estás en Mérida? Agenda una consulta presencial</a>
     </div>
   </div>
   <button class="btn-volver" id="btn-volver-resultado">Volver al inicio</button>
@@ -181,7 +247,7 @@ body>*{position:relative;z-index:1}
 
 <div id="instalar-app">
   <button id="btn-instalar">Instalar App en mi celular</button>
-  <div class="instrucciones-instalar" id="instrucciones-manual" style="display:none;"><strong>Android (Chrome):</strong> Toca los 3 puntitos arriba a la derecha y selecciona "Agregar a pantalla de inicio".<br><br><strong>iPhone (Safari):</strong> Toca el boton de compartir y selecciona "Agregar a inicio".</div>
+  <div class="instrucciones-instalar" id="instrucciones-manual" style="display:none;"><strong>Android (Chrome):</strong> Toca los 3 puntitos arriba a la derecha y selecciona "Agregar a pantalla de inicio".<br><br><strong>iPhone (Safari):</strong> Toca el botón de compartir y selecciona "Agregar a inicio".</div>
 </div>
 
 <script>
@@ -223,92 +289,80 @@ dice:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1
 food:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>',
 cake:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1M2 21h20"/><line x1="12" y1="4" x2="12" y2="11"/></svg>',
 sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
-moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
-lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
-back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>'
+moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
 };
 
 var M={
-exploradores:{dia:{azul:[{i:'shoes',t:'Llevar tus zapatos al cuarto',s:'Busca tus zapatos y dejalos en su lugar.'},{i:'trash',t:'Botar el papel',s:'Lleva este papel a la papelera, como un jugador de baloncesto!'},{i:'box',t:'Guardar 3 bloques',s:'Encuentra 3 juguetes o bloques y metelos en su caja.'},{i:'water',t:'El vaso de agua',s:'Busca tu vaso de agua y ponlo sobre la mesa.'},{i:'spray',t:'Limpiar la mesa',s:'Pasa este trapito limpio por la mesa donde comiste.'},{i:'paw',t:'Saludar al Yorkshire',s:'Dale los buenos dias al perrito con una caricia muy suave.'}],morada:[{i:'fruit',t:'Lavar la fruta',s:'Ayuda a mama o papa a lavar la fruta fresca con agua.'},{i:'paw',t:'El plato del gato',s:'Ayuda a buscar el plato limpio del gato y llvalo a su sitio.'}],dorada:[{i:'run',t:'Carrera de recoleccion',s:'Recoge 5 juguetes antes de que papa/mama cuente hasta 10!'}]},noche:{azul:[{i:'shirt',t:'Buscar la pijama',s:'Ve a tu cuarto y trae tu pijama favorita.'},{i:'basket',t:'La cesta de ropa',s:'Mete la ropa que usaste hoy en la cesta de ropa sucia.'},{i:'bear',t:'El companero de sueno',s:'Elige un peluche especial para que duerma contigo hoy.'},{i:'bulb',t:'Apagar la luz',s:'Ayuda a apagar la luz de tu cuarto para que los ojos descansen.'},{i:'heart',t:'Beso de buenas noches',s:'Dale un abrazo y un beso de buenas noches a tu familia.'},{i:'paw',t:'Despedirse del gato',s:'Dile buenas noches al gatito con la voz muy bajita.'}],morada:[{i:'book',t:'Elegir el cuento',s:'Busca 2 cuentos que quieras que leamos esta noche.'},{i:'tooth',t:'Cepillo listo',s:'Busca tu cepillo de dientes y daselo a papa o mama.'}],dorada:[{i:'balloon',t:'El globo magico',s:'Vamos a respirar hondo e inflar nuestra barriga como un globo 3 veces.'}]}},
-ayudantes:{dia:{azul:[{i:'bed',t:'Estirar las sabanas',s:'Ayuda a estirar las sabanas de tu cama al levantarte.'},{i:'paw',t:'Agua fresca',s:'Revisa el plato del Yorkshire y avisa si le falta agua.'},{i:'plate',t:'Plato a la cocina',s:'Cuando termines de comer, lleva tu plato a la cocina.'},{i:'fruit',t:'Elegir fruta real',s:'Ve a la cocina y elige una fruta entera para merendar.'},{i:'plant',t:'Regar la planta',s:'Ponle un poquito de agua a una planta de la casa.'},{i:'pencil',t:'Guardar los colores',s:'Mete todos los colores o crayones en su cartuchera.'}],morada:[{i:'paw',t:'Alimentar al gato',s:'Ayuda a servirle la porcion exacta de comida al gatito.'},{i:'food',t:'Despensa saludable',s:'Ayuda a organizar los alimentos reales en la despensa.'}],dorada:[{i:'basket',t:'Picnic en casa',s:'Prepara el espacio para hacer una merienda estilo picnic.'}]},noche:{azul:[{i:'shirt',t:'Ropa de manana',s:'Saca la ropa que te vas a poner manana y dejala doblada.'},{i:'sofa',t:'Ordenar cojines',s:'Acomoda los cojines del sofa para que la sala quede linda.'},{i:'tooth',t:'Cepillado de dientes',s:'Cepillate los dientes (papa/mama hace el repaso final).'},{i:'paw',t:'Buenas noches perrunas',s:'Hazle un carino suave al perrito para que sepa que es hora de dormir.'},{i:'bulb',t:'Modo cueva',s:'Ayuda a apagar las luces grandes para usar las luces tenues.'},{i:'book',t:'Libro a la cama',s:'Lleva el cuento elegido a tu cama y ponte comodo.'}],morada:[{i:'heart',t:'Masaje de calma',s:'Pide o haz un masaje suave con crema en las manos o los pies.'},{i:'heart',t:'Las 3 cosas buenas',s:'Cuentale a papa o mama 3 cosas que te hicieron feliz hoy.'}],dorada:[{i:'book',t:'El cuentacuentos',s:'Hoy tu inventas un cuento cortito y papa o mama te escuchan.'}]}},
-autonomos:{dia:{azul:[{i:'bed',t:'Hacer tu cama',s:'Haz tu cama completa y ordena tus almohadas.'},{i:'paw',t:'Comedor de mascotas',s:'Sirve el agua limpia y la comida del gato y del Yorkshire.'},{i:'bag',t:'Mochila lista',s:'Saca los cuadernos que no necesites y ordena tu mochila escolar.'},{i:'trash',t:'Sacar la basura',s:'Saca la bolsa de basura de la cocina o de tu cuarto.'},{i:'plate',t:'Lavar tu plato',s:'Lava tu plato y tus cubiertos al terminar de comer.'},{i:'shoes',t:'Zapatos en orden',s:'Asegurate de que todos tus zapatos esten en su lugar.'}],morada:[{i:'food',t:'Armar la lonchera real',s:'Ayuda a preparar tu lonchera eligiendo proteina y fruta.'},{i:'broom',t:'Barrer tu espacio',s:'Barre tu cuarto o el area donde jugaste.'}],dorada:[{i:'chef',t:'Ayudante de cocina',s:'Hoy eres el Chef asistente: ayuda a batir huevos o mezclar la ensalada.'}]},noche:{azul:[{i:'shirt',t:'Uniforme listo',s:'Deja tu uniforme o la ropa de manana colgada y lista.'},{i:'phone',t:'Apagar pantallas',s:'Pon a cargar o guarda cualquier dispositivo lejos de tu cuarto.'},{i:'shower',t:'Aseo nocturno',s:'Lavate la cara, cepillate y ponte la pijama sin que te lo recuerden.'},{i:'laptop',t:'Escritorio limpio',s:'Recoge tus colores, libros y deja tu escritorio libre.'},{i:'paw',t:'Paseo suave o carino',s:'Asegurate de que las mascotas esten relajadas en sus camas.'},{i:'water',t:'Vaso de agua',s:'Deja un pequeno vaso de agua cerca por si te da sed en la noche.'}],morada:[{i:'book',t:'Lectura independiente',s:'Lee tu libro favorito durante 15 minutos en silencio.'},{i:'pencil',t:'Diario de gratitud',s:'Escribe una cosa genial que aprendiste o agradeces hoy.'}],dorada:[{i:'yoga',t:'Guia de estiramiento',s:'Dirige a tu familia en 5 minutos de estiramientos suaves antes de dormir.'}]}},
-arcoiris:[{i:'film',t:'Cine en Casa',s:'RECOMPENSA! Hoy tu eliges que pelicula vemos juntos con palomitas caseras!'},{i:'tree',t:'Tarde de Parque',s:'RECOMPENSA! Tu eliges a que parque o lugar al aire libre vamos a jugar hoy.'},{i:'dice',t:'Torneo de Juegos',s:'RECOMPENSA! Papa y mama apagan los telefonos y jugamos tu juego de mesa favorito.'},{i:'food',t:'Menu Especial',s:'RECOMPENSA! Hoy tu decides que cenamos entre dos opciones de comida real.'},{i:'paw',t:'Aventura Perruna',s:'RECOMPENSA! Hoy lideras el paseo especial del Yorkshire por un camino nuevo.'},{i:'cake',t:'Postre en Familia',s:'RECOMPENSA! Vamos a la cocina juntos a preparar tu postre saludable favorito.'}]
+exploradores:{dia:{azul:[{i:'shoes',t:'Llevar tus zapatos al cuarto',s:'Busca tus zapatos y déjalos en su lugar.'},{i:'trash',t:'Botar el papel',s:'Lleva este papel a la papelera, ¡como un jugador de baloncesto!'},{i:'box',t:'Guardar 3 bloques',s:'Encuentra 3 juguetes o bloques y mételes en su caja.'},{i:'water',t:'El vaso de agua',s:'Busca tu vaso de agua y ponlo sobre la mesa.'},{i:'spray',t:'Limpiar la mesa',s:'Pasa este trapito limpio por la mesa donde comiste.'},{i:'paw',t:'Saludar al Yorkshire',s:'Dale los buenos días al perrito con una caricia muy suave.'}],morada:[{i:'fruit',t:'Lavar la fruta',s:'Ayuda a mamá o papá a lavar la fruta fresca con agua.'},{i:'paw',t:'El plato del gato',s:'Ayuda a buscar el plato limpio del gato y llévalo a su sitio.'}],dorada:[{i:'run',t:'Carrera de recolección',s:'¡Recoge 5 juguetes antes de que papá/mamá cuente hasta 10!'}]},noche:{azul:[{i:'shirt',t:'Buscar la pijama',s:'Ve a tu cuarto y trae tu pijama favorita.'},{i:'basket',t:'La cesta de ropa',s:'Mete la ropa que usaste hoy en la cesta de ropa sucia.'},{i:'bear',t:'El compañero de sueño',s:'Elige un peluche especial para que duerma contigo hoy.'},{i:'bulb',t:'Apagar la luz',s:'Ayuda a apagar la luz de tu cuarto para que los ojos descansen.'},{i:'heart',t:'Beso de buenas noches',s:'Dale un abrazo y un beso de buenas noches a tu familia.'},{i:'paw',t:'Despedirse del gato',s:'Dile buenas noches al gatito con la voz muy bajita.'}],morada:[{i:'book',t:'Elegir el cuento',s:'Busca 2 cuentos que quieras que leamos esta noche.'},{i:'tooth',t:'Cepillo listo',s:'Busca tu cepillo de dientes y dáselo a papá o mamá.'}],dorada:[{i:'balloon',t:'El globo mágico',s:'Vamos a respirar hondo e inflar nuestra barriga como un globo 3 veces.'}]}},
+ayudantes:{dia:{azul:[{i:'bed',t:'Estirar las sábanas',s:'Ayuda a estirar las sábanas de tu cama al levantarte.'},{i:'paw',t:'Agua fresca',s:'Revisa el plato del Yorkshire y avisa si le falta agua.'},{i:'plate',t:'Plato a la cocina',s:'Cuando termines de comer, lleva tu plato a la cocina.'},{i:'fruit',t:'Elegir fruta real',s:'Ve a la cocina y elige una fruta entera para merendar.'},{i:'plant',t:'Regar la planta',s:'Ponle un poquito de agua a una planta de la casa.'},{i:'pencil',t:'Guardar los colores',s:'Mete todos los colores o crayones en su cartuchera.'}],morada:[{i:'paw',t:'Alimentar al gato',s:'Ayuda a servirle la porción exacta de comida al gatito.'},{i:'food',t:'Despensa saludable',s:'Ayuda a organizar los alimentos reales en la despensa.'}],dorada:[{i:'basket',t:'Picnic en casa',s:'Prepara el espacio para hacer una merienda estilo picnic.'}]},noche:{azul:[{i:'shirt',t:'Ropa de mañana',s:'Saca la ropa que te vas a poner mañana y déjala doblada.'},{i:'sofa',t:'Ordenar cojines',s:'Acomoda los cojines del sofá para que la sala quede linda.'},{i:'tooth',t:'Cepillado de dientes',s:'Cepíllate los dientes (papá/mamá hace el repaso final).'},{i:'paw',t:'Buenas noches perrunas',s:'Hazle un cariño suave al perrito para que sepa que es hora de dormir.'},{i:'bulb',t:'Modo cueva',s:'Ayuda a apagar las luces grandes para usar las luces tenues.'},{i:'book',t:'Libro a la cama',s:'Lleva el cuento elegido a tu cama y ponte cómodo.'}],morada:[{i:'heart',t:'Masaje de calma',s:'Pide o haz un masaje suave con crema en las manos o los pies.'},{i:'heart',t:'Las 3 cosas buenas',s:'Cuéntale a papá o mamá 3 cosas que te hicieron feliz hoy.'}],dorada:[{i:'book',t:'El cuentacuentos',s:'Hoy tú inventas un cuento cortito y papá o mamá te escuchan.'}]}},
+autonomos:{dia:{azul:[{i:'bed',t:'Hacer tu cama',s:'Haz tu cama completa y ordena tus almohadas.'},{i:'paw',t:'Comedor de mascotas',s:'Sirve el agua limpia y la comida del gato y del Yorkshire.'},{i:'bag',t:'Mochila lista',s:'Saca los cuadernos que no necesites y ordena tu mochila escolar.'},{i:'trash',t:'Sacar la basura',s:'Saca la bolsa de basura de la cocina o de tu cuarto.'},{i:'plate',t:'Lavar tu plato',s:'Lava tu plato y tus cubiertos al terminar de comer.'},{i:'shoes',t:'Zapatos en orden',s:'Asegúrate de que todos tus zapatos estén en su lugar.'}],morada:[{i:'food',t:'Armar la lonchera real',s:'Ayuda a preparar tu lonchera eligiendo proteína y fruta.'},{i:'broom',t:'Barrer tu espacio',s:'Barre tu cuarto o el área donde jugaste.'}],dorada:[{i:'chef',t:'Ayudante de cocina',s:'Hoy eres el Chef asistente: ayuda a batir huevos o mezclar la ensalada.'}]},noche:{azul:[{i:'shirt',t:'Uniforme listo',s:'Deja tu uniforme o la ropa de mañana colgada y lista.'},{i:'phone',t:'Apagar pantallas',s:'Pon a cargar o guarda cualquier dispositivo lejos de tu cuarto.'},{i:'shower',t:'Aseo nocturno',s:'Lávate la cara, cepíllate y ponte la pijama sin que te lo recuerden.'},{i:'laptop',t:'Escritorio limpio',s:'Recoge tus colores, libros y deja tu escritorio libre.'},{i:'paw',t:'Paseo suave o cariño',s:'Asegúrate de que las mascotas estén relajadas en sus camas.'},{i:'water',t:'Vaso de agua',s:'Deja un pequeño vaso de agua cerca por si te da sed en la noche.'}],morada:[{i:'book',t:'Lectura independiente',s:'Lee tu libro favorito durante 15 minutos en silencio.'},{i:'pencil',t:'Diario de gratitud',s:'Escribe una cosa genial que aprendiste o agradeces hoy.'}],dorada:[{i:'yoga',t:'Guía de estiramiento',s:'Dirige a tu familia en 5 minutos de estiramientos suaves antes de dormir.'}]}},
+arcoiris:[{i:'film',t:'Cine en Casa',s:'¡RECOMPENSA! Hoy tú eliges qué película vemos juntos con palomitas caseras!'},{i:'tree',t:'Tarde de Parque',s:'¡RECOMPENSA! Tú eliges a qué parque o lugar al aire libre vamos a jugar hoy.'},{i:'dice',t:'Torneo de Juegos',s:'¡RECOMPENSA! Papá y mamá apagan los teléfonos y jugamos tu juego de mesa favorito.'},{i:'food',t:'Menú Especial',s:'¡RECOMPENSA! Hoy tú decides qué cenamos entre dos opciones de comida real.'},{i:'paw',t:'Aventura Perruna',s:'¡RECOMPENSA! Hoy lideras el paseo especial del Yorkshire por un camino nuevo.'},{i:'cake',t:'Postre en Familia',s:'¡RECOMPENSA! Vamos a la cocina juntos a preparar tu postre saludable favorito.'}]
 };
 
 var estado={edad:null,turno:null,sel:false,asignadas:[],cumplida:false};
-var SK="pequedoctor_misiones_v2";
+var SK="pequedoctor_misiones_v3";
 
-function cargar(){try{var d=JSON.parse(localStorage.getItem(SK));return d||{streak:0,lastPlayDate:null,lastDayPlay:null,lastNightPlay:null}}catch(e){return{streak:0,lastPlayDate:null,lastDayPlay:null,lastNightPlay:null}}}
+function cargar(){try{var d=JSON.parse(localStorage.getItem(SK));return d||{streak:0,lastPlayDate:null,lastDayPlay:null,lastNightPlay:null,arcoirisClaimed:false}}catch(e){return{streak:0,lastPlayDate:null,lastDayPlay:null,lastNightPlay:null,arcoirisClaimed:false}}}
 function guardar(d){localStorage.setItem(SK,JSON.stringify(d))}
 function getTurno(){var h=new Date().getHours();return(h>=6&&h<=16)?'dia':'noche'}
 function yaJugo(){var d=cargar();var t=getTurno();if(t==='dia')return d.lastDayPlay===new Date().toDateString();var f=new Date();if(new Date().getHours()<6)f.setDate(f.getDate()-1);return d.lastNightPlay===f.toDateString()}
 function getSig(){var t=getTurno();var a=new Date();var p=new Date(a);if(t==='dia'){p.setHours(17,0,0,0)}else{if(a.getHours()<6){p.setHours(6,0,0,0)}else{p.setDate(p.getDate()+1);p.setHours(6,0,0,0)}}return p}
 
-function actualizarRacha(){var d=cargar();var h=new Date().toDateString();var y=new Date();y.setDate(y.getDate()-1);if(d.lastPlayDate!==h&&d.lastPlayDate!==y.toDateString())d.streak=0;guardar(d);mostrarRacha(d.streak)}
+function actualizarRacha(){var d=cargar();var h=new Date().toDateString();var y=new Date();y.setDate(y.getDate()-1);if(d.lastPlayDate!==h&&d.lastPlayDate!==y.toDateString()){d.streak=0;d.arcoirisClaimed=false;guardar(d)}mostrarRacha(d.streak)}
 function mostrarRacha(s){document.querySelectorAll('.streak-dot').forEach(function(d,i){if(i<s)d.classList.add('lit');else d.classList.remove('lit')})}
 function incRacha(){var d=cargar();var h=new Date().toDateString();if(d.lastPlayDate!==h){d.streak=Math.min(d.streak+1,7);d.lastPlayDate=h;guardar(d)}mostrarRacha(d.streak)}
 
-function iniciarJuego(edad){estado.edad=edad;estado.turno=getTurno();if(yaJugo()){mostrarBloqueo();return}var tit={exploradores:'Exploradores &#183; 2-3 anos',ayudantes:'Ayudantes &#183; 4-6 anos',autonomos:'Autonomos &#183; 7+ anos'};document.getElementById('titulo-rango').innerHTML=tit[edad];var b=document.getElementById('turno-badge');if(estado.turno==='dia'){b.className='turno-badge dia';b.innerHTML=I.sun+' Mision de Dia'}else{b.className='turno-badge noche';b.innerHTML=I.moon+' Mision de Noche'}document.getElementById('pantalla-edad').style.display='none';document.getElementById('pantalla-tablero').style.display='flex';document.getElementById('pantalla-bloqueo').style.display='none';document.getElementById('pantalla-resultado').style.display='none';prepararCartas()}
+function iniciarJuego(edad){estado.edad=edad;estado.turno=getTurno();if(yaJugo()){mostrarBloqueo();return}var tit={exploradores:'Exploradores · 2-3 años',ayudantes:'Ayudantes · 4-6 años',autonomos:'Autónomos · 7+ años'};document.getElementById('titulo-rango').textContent=tit[edad];var b=document.getElementById('turno-badge');if(estado.turno==='dia'){b.className='turno-badge dia';b.innerHTML=I.sun+' Misión de Día'}else{b.className='turno-badge noche';b.innerHTML=I.moon+' Misión de Noche'}document.getElementById('pantalla-edad').style.display='none';document.getElementById('pantalla-tablero').style.display='flex';document.getElementById('pantalla-bloqueo').style.display='none';document.getElementById('pantalla-resultado').style.display='none';prepararCartas()}
 
-function prepararCartas(){estado.sel=false;estado.cumplida=false;estado.asignadas=[];var d=cargar();var forzar=d.streak>=5;for(var i=0;i<3;i++){var m=sortear(forzar);estado.asignadas.push(m);var c3=document.getElementById('carta-'+i);c3.classList.remove('volteada');var w=c3.parentElement;w.classList.remove('fade-out','centro');w.style.pointerEvents='auto';var f=document.getElementById('frontal-'+i);f.className='cara cara-frontal '+m.rareza;f.innerHTML=I[m.icon]+'<div class="t-carta">'+m.tituloCorto+'</div><div class="r-label">'+rarezaLbl(m.rareza)+'</div>'}document.getElementById('instruccion-cartas').style.display='block'}
+function prepararCartas(){estado.sel=false;estado.cumplida=false;estado.asignadas=[];var d=cargar();
+// Lógica arcoíris: solo forzar si streak>=5 Y no se ha reclamado aún
+var forzar=false;
+if(d.streak>=5&&!d.arcoirisClaimed){forzar=true}
+for(var i=0;i<3;i++){var m=sortear(forzar);estado.asignadas.push(m);var c3=document.getElementById('carta-'+i);c3.classList.remove('volteada');var w=c3.parentElement;w.classList.remove('fade-out','centro');w.style.pointerEvents='auto';var f=document.getElementById('frontal-'+i);f.className='cara cara-frontal '+m.rareza;f.innerHTML=I[m.icon]+'<div class="t-carta">'+m.tituloCorto+'</div><div class="r-label">'+rarezaLbl(m.rareza)+'</div>'}document.getElementById('instruccion-cartas').style.display='block'}
 
 function sortear(forzar){var e=estado.edad;var t=estado.turno;var r;if(forzar)r='arcoiris';else{var rnd=Math.random();if(rnd<0.6)r='azul';else if(rnd<0.9)r='morada';else r='dorada'}var m;if(r==='arcoiris'){var la=M.arcoiris;m=la[Math.floor(Math.random()*la.length)]}else{var l=M[e][t][r];if(!l||l.length===0){l=M[e][t]['azul'];r='azul'}m=l[Math.floor(Math.random()*l.length)]}var tc=m.t;if(tc.indexOf(':')>0)tc=tc.substring(0,tc.indexOf(':'));if(tc.indexOf('(')>0)tc=tc.substring(0,tc.indexOf('('));return{icon:m.i,tituloCorto:tc.trim(),titulo:m.t,subtitulo:m.s,rareza:r}}
-function rarezaLbl(r){return{azul:'Facil',morada:'Especial',dorada:'Epica',arcoiris:'Recompensa'}[r]||'Mision'}
+function rarezaLbl(r){return{azul:'Fácil',morada:'Especial',dorada:'Épica',arcoiris:'Recompensa'}[r]||'Misión'}
 
-function seleccionarCarta(idx){if(estado.sel)return;estado.sel=true;for(var i=0;i<3;i++){if(i!==idx){var w=document.getElementById('carta-'+i).parentElement;w.classList.add('fade-out');w.style.pointerEvents='none'}else{document.getElementById('carta-'+i).parentElement.classList.add('centro')}}setTimeout(function(){document.getElementById('carta-'+idx).classList.add('volteada');var r=estado.asignadas[idx].rareza;if(r==='dorada'||r==='arcoiris')confetti(r==='arcoiris'?50:30);setTimeout(function(){mostrarResultado(idx)},1800)},400);document.getElementById('instruccion-cartas').style.display='none'}
+function seleccionarCarta(idx){if(estado.sel)return;estado.sel=true;for(var i=0;i<3;i++){if(i!==idx){var w=document.getElementById('carta-'+i).parentElement;w.classList.add('fade-out');w.style.pointerEvents='none'}else{document.getElementById('carta-'+i).parentElement.classList.add('centro')}}setTimeout(function(){document.getElementById('carta-'+idx).classList.add('volteada');var r=estado.asignadas[idx].rareza;if(r==='dorada'||r==='arcoiris')confetti(r==='arcoiris'?50:30);
+// Si salió arcoíris, marcar como reclamado
+if(r==='arcoiris'){var d=cargar();d.arcoirisClaimed=true;guardar(d)}
+setTimeout(function(){mostrarResultado(idx)},1800)},400);document.getElementById('instruccion-cartas').style.display='none'}
 
 function confetti(n){var cl=['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#9D4EDD','#FF8C42'];for(var i=0;i<n;i++){var c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'%';c.style.top='50%';c.style.background=cl[Math.floor(Math.random()*cl.length)];c.style.borderRadius=Math.random()>0.5?'50%':'0';c.style.transition='all 1.5s ease-out';document.body.appendChild(c);setTimeout(function(el){el.style.transform='translate('+(Math.random()*300-150)+'px,'+(Math.random()*300+100)+'px) rotate('+Math.random()*720+'deg)';el.style.opacity='0'},10,c);setTimeout(function(el){el.remove()},1600,c)}}
 
-function mostrarResultado(idx){var m=estado.asignadas[idx];var card=document.getElementById('resultado-card');card.className='resultado-card '+m.rareza;document.getElementById('icono-resultado').innerHTML=I[m.icon];document.getElementById('texto-resultado').textContent=m.titulo;document.getElementById('texto-resultado-sub').textContent=m.subtitulo;var et=document.getElementById('etiqueta-resultado');if(m.rareza==='arcoiris'){et.textContent='Recompensa especial!';et.classList.add('arcoiris')}else{et.textContent='Tu mision es';et.classList.remove('arcoiris')}var btn=document.getElementById('btn-cumplida');btn.disabled=false;btn.style.display='flex';document.getElementById('btn-cumplida-texto').textContent='Mision Cumplida';document.getElementById('banner-cta').style.display='none';document.getElementById('pantalla-tablero').style.display='none';document.getElementById('pantalla-resultado').style.display='flex'}
+function mostrarResultado(idx){var m=estado.asignadas[idx];var card=document.getElementById('resultado-card');card.className='resultado-card '+m.rareza;document.getElementById('icono-resultado').innerHTML=I[m.icon];document.getElementById('texto-resultado').textContent=m.titulo;document.getElementById('texto-resultado-sub').textContent=m.subtitulo;var et=document.getElementById('etiqueta-resultado');if(m.rareza==='arcoiris'){et.textContent='¡Recompensa especial!';et.classList.add('arcoiris')}else{et.textContent='Tu misión es';et.classList.remove('arcoiris')}var btn=document.getElementById('btn-cumplida');btn.disabled=false;btn.style.display='flex';document.getElementById('btn-cumplida-texto').textContent='Misión Cumplida';document.getElementById('banner-cta').style.display='none';document.getElementById('pantalla-tablero').style.display='none';document.getElementById('pantalla-resultado').style.display='flex'}
 
-function marcarCumplida(){if(estado.cumplida)return;estado.cumplida=true;registrar();incRacha();var btn=document.getElementById('btn-cumplida');btn.disabled=true;document.getElementById('btn-cumplida-texto').textContent='Completada! +1 estrella';confetti(25);setTimeout(mostrarBanner,1000)}
+function marcarCumplida(){if(estado.cumplida)return;estado.cumplida=true;registrar();incRacha();var btn=document.getElementById('btn-cumplida');btn.disabled=true;document.getElementById('btn-cumplida-texto').textContent='¡Completada! +1 estrella';confetti(25);setTimeout(mostrarBanner,1000)}
 function registrar(){var d=cargar();var t=getTurno();if(t==='dia')d.lastDayPlay=new Date().toDateString();else{var f=new Date();if(new Date().getHours()<6)f.setDate(f.getDate()-1);d.lastNightPlay=f.toDateString()}guardar(d)}
 
-function mostrarBanner(){var t=estado.turno;var bt=document.getElementById('banner-titulo');var bx=document.getElementById('banner-texto');var bl=document.getElementById('btn-libro');if(t==='noche'){bt.innerHTML='Hora de preparar el descanso!';bx.textContent='Una buena rutina de sueno potencia su desarrollo. Descubre mi guia para mejorar las noches.';bl.textContent='Ver guia de sueno en Amazon';bl.href=CONFIG.AMAZON_NOCHE}else{bt.innerHTML='Mision aceptada!';bx.textContent='Fomentar la autonomia es el primer paso. Descubre como alejarlo de las pantallas.';bl.textContent='Ver guia en Amazon';bl.href=CONFIG.AMAZON_DIA}document.getElementById('banner-cta').style.display='block'}
+function mostrarBanner(){var t=estado.turno;var bt=document.getElementById('banner-titulo');var bx=document.getElementById('banner-texto');var bl=document.getElementById('btn-libro');if(t==='noche'){bt.innerHTML='¡Hora de preparar el descanso!';bx.textContent='Una buena rutina de sueño potencia su desarrollo. Descubre mi guía para mejorar las noches.';bl.textContent='Ver guía de sueño en Amazon';bl.href=CONFIG.AMAZON_NOCHE}else{bt.innerHTML='¡Misión aceptada!';bx.textContent='Fomentar la autonomía es el primer paso. Descubre cómo alejarlo de las pantallas.';bl.textContent='Ver guía en Amazon';bl.href=CONFIG.AMAZON_DIA}document.getElementById('banner-cta').style.display='block'}
 
 function volverInicio(){document.getElementById('pantalla-tablero').style.display='none';document.getElementById('pantalla-bloqueo').style.display='none';document.getElementById('pantalla-resultado').style.display='none';document.getElementById('pantalla-edad').style.display='flex'}
 
-function mostrarBloqueo(){var t=getTurno();var p=getSig();document.getElementById('pantalla-edad').style.display='none';document.getElementById('pantalla-tablero').style.display='none';document.getElementById('pantalla-resultado').style.display='none';document.getElementById('pantalla-bloqueo').style.display='flex';if(t==='dia'){document.getElementById('icono-bloqueo').innerHTML=I.sun;document.getElementById('bloqueo-titulo').textContent='Mision diurna completada!';document.getElementById('bloqueo-mensaje').textContent='Has cumplido tu mision de dia. Vuelve esta noche para tu mision nocturna.';document.getElementById('countdown-label').textContent='Mision nocturna en';document.getElementById('countdown-sub').textContent='Se desbloquea a las 5:00 PM'}else{document.getElementById('icono-bloqueo').innerHTML=I.moon;document.getElementById('bloqueo-titulo').textContent='Mision nocturna completada!';document.getElementById('bloqueo-mensaje').textContent='Has cumplido tu mision de noche. Vuelve manana para una nueva aventura.';document.getElementById('countdown-label').textContent='Mision diurna en';document.getElementById('countdown-sub').textContent='Se desbloquea a las 6:00 AM'}iniciarCountdown(p)}
-function iniciarCountdown(obj){function act(){var a=new Date();var d=obj-a;if(d<=0){document.getElementById('countdown-timer').textContent='00:00:00';document.getElementById('countdown-sub').textContent='Recarga la pagina!';clearInterval(int);return}var h=Math.floor(d/3600000);var m=Math.floor((d%3600000)/60000);var s=Math.floor((d%60000)/1000);document.getElementById('countdown-timer').textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}act();var int=setInterval(act,1000)}
+function mostrarBloqueo(){var t=getTurno();var p=getSig();document.getElementById('pantalla-edad').style.display='none';document.getElementById('pantalla-tablero').style.display='none';document.getElementById('pantalla-resultado').style.display='none';document.getElementById('pantalla-bloqueo').style.display='flex';if(t==='dia'){document.getElementById('icono-bloqueo').innerHTML=I.sun;document.getElementById('bloqueo-titulo').textContent='¡Misión diurna completada!';document.getElementById('bloqueo-mensaje').textContent='Has cumplido tu misión de día. Vuelve esta noche para tu misión nocturna.';document.getElementById('countdown-label').textContent='Misión nocturna en';document.getElementById('countdown-sub').textContent='Se desbloquea a las 5:00 PM'}else{document.getElementById('icono-bloqueo').innerHTML=I.moon;document.getElementById('bloqueo-titulo').textContent='¡Misión nocturna completada!';document.getElementById('bloqueo-mensaje').textContent='Has cumplido tu misión de noche. Vuelve mañana para una nueva aventura.';document.getElementById('countdown-label').textContent='Misión diurna en';document.getElementById('countdown-sub').textContent='Se desbloquea a las 6:00 AM'}iniciarCountdown(p)}
+function iniciarCountdown(obj){function act(){var a=new Date();var d=obj-a;if(d<=0){document.getElementById('countdown-timer').textContent='00:00:00';document.getElementById('countdown-sub').textContent='¡Recarga la página!';clearInterval(int);return}var h=Math.floor(d/3600000);var m=Math.floor((d%3600000)/60000);var s=Math.floor((d%60000)/1000);document.getElementById('countdown-timer').textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}act();var int=setInterval(act,1000)}
 
 // ===== INICIALIZACION =====
 function init(){
-  // Botones de edad
-  document.querySelectorAll('.btn-edad').forEach(function(btn){
-    btn.addEventListener('click',function(){iniciarJuego(this.getAttribute('data-edad'))});
-  });
-  // Cartas
-  document.querySelectorAll('.carta-wrapper').forEach(function(w){
-    w.addEventListener('click',function(){seleccionarCarta(parseInt(this.getAttribute('data-c')))});
-  });
-  // Boton mision cumplida - asignacion directa multiple metodos
+  document.querySelectorAll('.btn-edad').forEach(function(btn){btn.addEventListener('click',function(){iniciarJuego(this.getAttribute('data-edad'))})});
+  document.querySelectorAll('.carta-wrapper').forEach(function(w){w.addEventListener('click',function(){seleccionarCarta(parseInt(this.getAttribute('data-c')))})});
   var btnC=document.getElementById('btn-cumplida');
-  if(btnC){
-    btnC.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();marcarCumplida();return false});
-    btnC.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();marcarCumplida();return false});
-    btnC.style.cursor='pointer';
-    btnC.style.pointerEvents='auto';
-  }
-  // Botones volver
-  var vb=document.getElementById('btn-volver-bloqueo');
-  if(vb)vb.addEventListener('click',volverInicio);
-  var vr=document.getElementById('btn-volver-resultado');
-  if(vr)vr.addEventListener('click',volverInicio);
-  // Boton instalar
-  var bi=document.getElementById('btn-instalar');
-  if(bi)bi.addEventListener('click',instalarApp);
-  // Racha
+  if(btnC){btnC.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();marcarCumplida();return false});btnC.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();marcarCumplida();return false});btnC.style.cursor='pointer';btnC.style.pointerEvents='auto'}
+  var vb=document.getElementById('btn-volver-bloqueo');if(vb)vb.addEventListener('click',volverInicio);
+  var vr=document.getElementById('btn-volver-resultado');if(vr)vr.addEventListener('click',volverInicio);
+  var bi=document.getElementById('btn-instalar');if(bi)bi.addEventListener('click',instalarApp);
+  // Modal info
+  var btnInfo=document.getElementById('btn-info');
+  var modal=document.getElementById('modal-info');
+  var modalClose=document.getElementById('modal-close');
+  if(btnInfo)btnInfo.addEventListener('click',function(){modal.classList.add('active')});
+  if(modalClose)modalClose.addEventListener('click',function(){modal.classList.remove('active')});
+  if(modal)modal.addEventListener('click',function(e){if(e.target===modal)modal.classList.remove('active')});
   actualizarRacha();
   var d=cargar();var h=new Date().toDateString();var y=new Date();y.setDate(y.getDate()-1);
-  if(d.lastPlayDate&&d.lastPlayDate!==h&&d.lastPlayDate!==y.toDateString()){d.streak=0;guardar(d);mostrarRacha(0)}
+  if(d.lastPlayDate&&d.lastPlayDate!==h&&d.lastPlayDate!==y.toDateString()){d.streak=0;d.arcoirisClaimed=false;guardar(d);mostrarRacha(0)}
 }
-
-// Ejecutar inmediatamente si el DOM ya esta listo, o esperar
-if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded',init);
-}else{
-  init();
-}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}
 
 // ===== PWA =====
 var evInst=null;
